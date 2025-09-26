@@ -111,11 +111,12 @@ function analyzeSalesData(data, options) {
     seller.bonus = options.calculateBonus(seller);
 
     // Преобразуем объект с проданными товарами в массив из 10 самых продаваемых товаров
-    seller.top_products = Object.entries(seller.products_sold) // Преобразуем в массив [[sku, quantity], ...]
+    const top_roducts = Object.entries(seller.products_sold) // Преобразуем в массив [[sku, quantity], ...]
         .map(([sku, quantity]) => ({ sku, quantity })) // Трансформируем в [{sku, quantity}, ...]
         .sort((a, b) => b.quantity - a.quantity) // Сортируем по убыванию quantity
         .slice(0, 10); // Берем только первые 10 элементов
-});
+seller.top_products = top_Products;
+    });
 // @TODO: Подготовка итоговой коллекции с нужными полями
 return sellerStats.map(seller => ({
     seller_id: seller.seller_id, 
